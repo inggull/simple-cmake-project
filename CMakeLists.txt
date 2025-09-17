@@ -38,30 +38,29 @@ foreach(CMAKE_FILE_NAME ${CMAKE_FILE_NAMES})
     list(APPEND CMAKE_SRCS src/${CMAKE_FILE_NAME})
 endforeach()
 
-# src/main.cc를 사용하여 ${CMAKE_TARGET}이라는 이름으로 실행 파일을 추가
-add_executable(${CMAKE_TARGET} ${CMAKE_SRCS})
-
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    message(" - MSVC의 인코딩 방식을 UTF-8로 강제하는 컴파일 옵션을 추가")
-    target_compile_options(${CMAKE_TARGET} PUBLIC /utf-8)
-endif()
-
-# 헤더 파일 경로를 연결
-target_include_directories(${CMAKE_TARGET} PUBLIC ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/install/include)
-
-# 라이브러리 파일 경로를 연결
-target_link_directories(${CMAKE_TARGET} PUBLIC ${CMAKE_SOURCE_DIR}/lib ${CMAKE_BINARY_DIR}/install/lib)
-
 # 빌드되어야 하는 순서로 프로젝트를 추가
 include(Dependency.cmake)
 add_subdirectory(add)
 add_subdirectory(test)
 
+# src/main.cc를 사용하여 ${CMAKE_TARGET}이라는 이름으로 실행 파일을 추가
+add_executable(${CMAKE_TARGET} ${CMAKE_SRCS})
+
 # 의존성이 먼저 빌드될 수 있게 관계 설정
 add_dependencies(${CMAKE_TARGET} ${DEPS} add)
 
+# 헤더 파일 경로를 연결
+target_include_directories(${CMAKE_TARGET} PUBLIC ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/install/include ${CMAKE_SOURCE_DIR}/add/include)
+
+# 라이브러리 파일 경로를 연결
+target_link_directories(${CMAKE_TARGET} PUBLIC $${CMAKE_BINARY_DIR}/lib ${CMAKE_BINARY_DIR}/install/lib)
+
 # 실행 파일에 링크할 라이브러리를 추가
-target_link_libraries(${CMAKE_TARGET} ${LIBS} add)
+target_link_libraries(${CMAKE_TARGET} ${LIBS})
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    target_compile_options(${CMAKE_TARGET} PUBLIC /utf-8)  # MSVC의 인코딩 방식을 UTF-8로 강제하는 컴파일 옵션을 추가
+endif()
 
 # 따로 설정하지 않는다면 디버그를 기본 빌드 타입으로 설정
 # if(NOT CMAKE_BUILD_TYPE)

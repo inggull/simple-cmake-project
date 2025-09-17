@@ -1,14 +1,12 @@
 project(
-    "Test"
+    "test"
     LANGUAGES CXX
     VERSION 0.1.0
-    HOMEPAGE_URL ""
-    DESCRIPTION ""
 )
 
 message("[${PROJECT_NAME}]")
 
-set(TARGET test)
+set(TARGET ${PROJECT_NAME})
 set(FILE_NAMES)
 set(SRCS)
 
@@ -26,16 +24,12 @@ foreach(FILE_NAME ${FILE_NAMES})
 endforeach()
 
 add_executable(${TARGET} ${SRCS})
+add_dependencies(${TARGET} ${DEPS} add)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    message(" - MSVC의 인코딩 방식을 UTF-8로 강제하는 컴파일 옵션을 추가")
     target_compile_options(${TARGET} PRIVATE /utf-8)
 endif()
 
-target_include_directories(${TARGET} PRIVATE ${CMAKE_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/install/include)
-
-target_link_directories(${TARGET} PRIVATE ${CMAKE_SOURCE_DIR}/lib ${CMAKE_BINARY_DIR}/install/lib)
-
-add_dependencies(${TARGET} ${DEPS} add)
-
-target_link_libraries(${TARGET} PRIVATE ${LIBS} add)
+target_include_directories(${TARGET} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/install/include ${CMAKE_SOURCE_DIR}/add/include)
+target_link_directories(${TARGET} PRIVATE ${CMAKE_BINARY_DIR}/lib ${CMAKE_BINARY_DIR}/install/lib)
+target_link_libraries(${TARGET} PRIVATE ${LIBS})
