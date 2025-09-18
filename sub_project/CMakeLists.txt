@@ -1,5 +1,5 @@
 project(
-    "add"
+    "sub_project"
     LANGUAGES CXX
     VERSION 0.1.0
 )
@@ -21,17 +21,13 @@ foreach(FILE_NAME ${FILE_NAMES})
     list(APPEND SRCS src/${FILE_NAME})
 endforeach()
 
-add_library(${PROJECT_NAME} STATIC ${SRCS})
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/install/include)
-foreach(DEP ${DEPS})
-    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/_deps/${DEP}-src/include)
-endforeach()
+add_executable(${PROJECT_NAME} ${SRCS})
+add_dependencies(${PROJECT_NAME} ${DEPS} add)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(${PROJECT_NAME} PRIVATE /utf-8)
 endif()
 
-# PARENT_SCOPE: 상위 프로젝트의 변수를 지칭
-set(DEPS ${DEPS} add PARENT_SCOPE)
-set(LIBS ${LIBS} add PARENT_SCOPE)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/install/include ${CMAKE_SOURCE_DIR}/add/include)
+target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/lib ${CMAKE_BINARY_DIR}/install/lib)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBS})
