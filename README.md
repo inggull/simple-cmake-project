@@ -5,7 +5,7 @@ CMake를 공부하며 작성한 간단한 CMake 프로젝트입니다.
 ## 명령어
 
 `<CMAKE_SOURCE_DIR>`: `CMakeLists.txt` 파일이 있는 프로젝트의 최상위 경로  
-`<CMAKE_BINARY_DIR>`: 프로젝트가 빌드되는 경로로, 보통은 `build`를 사용
+`<CMAKE_BINARY_DIR>`: 프로젝트가 빌드되는 경로로, 관습적으로 `build`를 사용
 
 ### [Configure & Generation]
 

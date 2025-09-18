@@ -6,8 +6,8 @@ include(ExternalProject)
 # 클론해올 외부 프로젝트 이름과 여러 옵션들을 설정
 ExternalProject_Add(
     dep-spdlog  # 외부 프로젝트 이름
-    GIT_REPOSITORY "https://github.com/gabime/spdlog.git"  # 원격 저장소 주소
-    GIT_TAG "v1.x"  # 특정 브랜치나 태그
+    GIT_REPOSITORY https://github.com/gabime/spdlog.git  # 원격 저장소 주소
+    GIT_TAG v1.x  # 특정 브랜치나 태그
     GIT_SHALLOW 1  # 특정 브랜치나 태그로부터 최근 1개의 커밋 히스토리만 클론
     PREFIX ${CMAKE_BINARY_DIR}/install  # 외부 프로젝트를 클론해서 빌드하는 경로
     CMAKE_ARGS  # 외부 프로젝트의 CMake 구성시 인수로 전달

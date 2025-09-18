@@ -8,11 +8,11 @@ set(DEPS)
 set(LIBS)
 
 project(
-    "main_project"
+    main_project
     LANGUAGES CXX
     VERSION 0.1.0
-    HOMEPAGE_URL "https://github.com/inggull/simple-cmake-project.git"
-    DESCRIPTION "A simple CMake project while studying CMake"
+    HOMEPAGE_URL https://github.com/inggull/simple-cmake-project.git
+    DESCRIPTION "A Simple CMake Project"
 )
 message("[Compiler]")
 message(" - Path : ${CMAKE_CXX_COMPILER}")
