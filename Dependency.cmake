@@ -33,6 +33,8 @@ FetchContent_Declare(
 
 # 구성 시에 외부 프로젝트를 클론하여 소스 파일 경로를 서브 디렉토리로 추가하고
 # 외부 프로젝트 이름을 타겟으로 지정
+# 클론된 외부 프로젝트의 소스 파일 경로: ${CMAKE_BINARY_DIR}/_deps/<외부 프로젝트 이름>-src
+# 클론된 외부 프로젝트의 빌드 경로: ${CMAKE_BINARY_DIR}/_deps/<외부 프로젝트 이름>-build
 FetchContent_MakeAvailable(spdlog)
 
 # FetchContent는 외부 프로젝트의 타겟에 컴파일러 인수를 전달하는 등의 설정이 가능하다
