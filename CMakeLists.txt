@@ -14,6 +14,7 @@ project(
     HOMEPAGE_URL https://github.com/inggull/simple-cmake-project.git
     DESCRIPTION "A Simple CMake Project"
 )
+
 message("[Compiler]")
 message(" - Path : ${CMAKE_CXX_COMPILER}")
 message(" - ID : ${CMAKE_CXX_COMPILER_ID}")
