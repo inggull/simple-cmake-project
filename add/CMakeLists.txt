@@ -15,7 +15,7 @@ foreach(FILE_PATH ${FILE_PATHS})
     list(APPEND FILE_NAMES ${FILE_NAME})
 endforeach()
 
-message(" - Source: ${FILE_NAME}")
+message(" - Source: ${FILE_NAMES}")
 
 foreach(FILE_NAME ${FILE_NAMES})
     list(APPEND SRCS src/${FILE_NAME})
