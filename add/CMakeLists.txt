@@ -9,7 +9,7 @@ message("[${PROJECT_NAME}]")
 set(FILE_NAMES)
 set(SRCS)
 
-file(GLOB FILE_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc)
+file(GLOB FILE_PATHS ${PROJECT_SOURCE_DIR}/src/*.cc)
 foreach(FILE_PATH ${FILE_PATHS})
     get_filename_component(FILE_NAME ${FILE_PATH} NAME)
     list(APPEND FILE_NAMES ${FILE_NAME})
@@ -23,7 +23,7 @@ endforeach()
 
 add_library(${PROJECT_NAME} STATIC ${SRCS})
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/install/include)
+target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/install/include)
 foreach(DEP ${DEPS})
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/_deps/${DEP}-src/include)
 endforeach()
