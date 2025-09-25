@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.11)
 
-set(CMAKE_CXX_STANDARD 17)  # 프로젝트를 빌드할 때 컴파일러에 전달할 C++ 언어 버전을 설정
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)  # 프로젝트 실행 파일을 빌드할 경로를 설정
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)  # 프로젝트 동적 라이브러리를 빌드할 경로를 설정
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)  # 프로젝트 정적 라이브러리를 빌드할 경로를 설정
+set(CMAKE_CXX_STANDARD 17) # 프로젝트를 빌드할 때 컴파일러에 전달할 C++ 언어 버전을 설정
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # 프로젝트 실행 파일을 빌드할 경로를 설정
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) # 프로젝트 동적 라이브러리를 빌드할 경로를 설정
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) # 프로젝트 정적 라이브러리를 빌드할 경로를 설정
 set(DEPS)
 set(LIBS)
 
@@ -61,7 +61,7 @@ target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC $${CMAKE_BINARY_DIR}/lib ${
 target_link_libraries(${CMAKE_PROJECT_NAME} ${LIBS})
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(${CMAKE_PROJECT_NAME} PUBLIC /utf-8)  # MSVC의 인코딩 방식을 UTF-8로 강제하는 컴파일 옵션을 추가
+    target_compile_options(${CMAKE_PROJECT_NAME} PUBLIC /utf-8) # MSVC의 인코딩 방식을 UTF-8로 강제하는 컴파일 옵션을 추가
 endif()
 
 # 따로 설정하지 않는다면 디버그를 기본 빌드 타입으로 설정
