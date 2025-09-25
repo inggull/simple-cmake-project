@@ -14,6 +14,7 @@ project(
     HOMEPAGE_URL https://github.com/inggull/simple-cmake-project.git
     DESCRIPTION "A Simple CMake Project"
 )
+
 message("[Compiler]")
 message(" - Path : ${CMAKE_CXX_COMPILER}")
 message(" - ID : ${CMAKE_CXX_COMPILER_ID}")
@@ -30,7 +31,7 @@ foreach(FILE_PATH ${FILE_PATHS})
     list(APPEND FILE_NAMES ${FILE_NAME})
 endforeach()
 
-message(" - source: ${FILE_NAME}")
+message(" - source: ${FILE_NAMES}")
 
 foreach(FILE_NAME ${FILE_NAMES})
     list(APPEND SRCS src/${FILE_NAME})
