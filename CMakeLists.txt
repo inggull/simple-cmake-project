@@ -66,9 +66,9 @@ endforeach()
 
 # 라이브러리 파일 경로를 연결한다
 # ExternalProject
-target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/install/lib) 
+target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/install/lib)
 # FetchContent
-target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/lib) 
+target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/lib)
 
 # 실행 파일에 링크할 라이브러리를 추가한다.
 target_link_libraries(${CMAKE_PROJECT_NAME} ${LIBS})
