@@ -22,7 +22,20 @@ foreach(FILE_NAME ${FILE_NAMES})
 endforeach()
 
 add_executable(${PROJECT_NAME} ${SRCS})
-add_dependencies(${PROJECT_NAME} ${DEPS} add)
+add_dependencies(${PROJECT_NAME} ${DEPS})
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include)
+# ExternalProject
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/install/include)
+# FetchContent
+foreach(DEP ${DEPS})
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/_deps/${DEP}-src/include)
+endforeach()
+# ExternalProject
+target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/install/lib)
+# FetchContent
+target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/lib)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBS})
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(${PROJECT_NAME} PRIVATE /utf-8)
@@ -33,16 +46,3 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 elseif (CMAKE_BUILD_TYPE STREQUAL Release)
     target_compile_options(${PROJECT_NAME} PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4 /Wall /utf-8> $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra>)
 endif()
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include)
-# ExternalProject
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/install/include)
-# FetchContent
-foreach(DEP ${DEPS})
-    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/_deps/${DEP}-src/include)
-endforeach()
-# ExternalProject
-target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/install/lib) 
-# FetchContent
-target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/lib) 
-target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBS})

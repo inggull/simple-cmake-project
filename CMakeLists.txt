@@ -54,7 +54,7 @@ add_subdirectory(sub_project)
 add_executable(${CMAKE_PROJECT_NAME} ${SRCS})
 
 # 의존성이 먼저 빌드될 수 있게 관계를 설정한다
-add_dependencies(${CMAKE_PROJECT_NAME} ${DEPS} add)
+add_dependencies(${CMAKE_PROJECT_NAME} ${DEPS})
 
 # 헤더 파일 경로를 연결한다
 # ExternalProject
@@ -73,13 +73,13 @@ target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/lib)
 # 실행 파일에 링크할 라이브러리를 추가한다.
 target_link_libraries(${CMAKE_PROJECT_NAME} ${LIBS})
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE /utf-8) # MSVC의 인코딩 방식을 UTF-8로 강제하는 컴파일 옵션을 추가한다
-endif()
-
 # 따로 설정하지 않는다면 디버그를 기본 빌드 타입으로 설정한다
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
+endif()
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE /utf-8) # MSVC의 인코딩 방식을 UTF-8로 강제하는 컴파일 옵션을 추가한다
 endif()
 
 # 빌드 타입과 컴파일러에 따른 컴파일 옵션을 설정한다
