@@ -50,7 +50,7 @@ include(Dependency.cmake)
 add_subdirectory(add)
 add_subdirectory(sub_project)
 
-# `src/main.cc`를 사용하여 `CMAKE_PROJECT_NAME`이라는 이름으로 실행 파일을 추가한다
+# `src/main.cpp`를 사용하여 `CMAKE_PROJECT_NAME`이라는 이름으로 실행 파일을 추가한다
 add_executable(${CMAKE_PROJECT_NAME} ${SRCS})
 
 # 의존성이 먼저 빌드될 수 있게 관계를 설정한다
